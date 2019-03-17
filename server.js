@@ -39,6 +39,7 @@ const deleteTweet = (request, response) => {
   if (request.query.secret !== SECRET) {
     return
   }
+  
   let id = +request.params.id
   
   Storage.deleteTweetByID(id).then((tweet) => {
@@ -49,13 +50,13 @@ const deleteTweet = (request, response) => {
   })
 }
 
-const onGetHome = (request, response) => {
+const showHome = (request, response) => {
   response.sendFile(__dirname + '/views/index.html')
 }
 
 app.use(express.static('public'))
 
-app.get('/', onGetHome)
+app.get('/', showHome)
 app.get('/api/fetch', fetchTweets)
 app.get('/api/future', getRandomTweet)
 app.get('/api/futures', getAllTweets)
